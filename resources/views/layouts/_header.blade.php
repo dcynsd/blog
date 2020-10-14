@@ -1,4 +1,4 @@
-<header style="height: {{ (current_navigation($navigations))['height'] }};">
+<header style="height: {{ (current_navigation($navigations, $currentPost))['height'] }};">
     <nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
         <div class="container">
             <a class="navbar-brand" href="/">&nbsp;<strong>{{ config('app.name') }}</strong>&nbsp;</a>
@@ -50,22 +50,22 @@
     </nav>
 
     <div class="banner intro-2" id="background" parallax="true"
-         style="background: url({{ (current_navigation($navigations))['image'] }}) center center / cover no-repeat; transform: translate3d(0px, 0px, 0px);">
+         style="background: url({{ (current_navigation($navigations, $currentPost))['image'] }}) center center / cover no-repeat; transform: translate3d(0px, 0px, 0px);">
         <div class="full-bg-img">
             <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
                 <div class="container page-header text-center fade-in-up">
                     <span class="h2" id="subtitle"> </span>
                     <span class="typed-cursor h2 typed-cursor--blink"></span>
-                    @if((current_navigation($navigations))['is_post_meta'])
+                    @if($currentPost)
                         <div class="mt-3">
                         <span class="post-meta mr-2">
                             <i class="iconfont icon-author" aria-hidden="true"></i>
-                            pxxyyz
+                            {{ $currentPost->author }}
                         </span>
                             <span class="post-meta">
                             <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-                            <time datetime="2020-05-28 14:30" pubdate="">
-                                2020年5月28日 下午
+                            <time datetime="{{ $currentPost->created_at }}">
+                                {{ $currentPost->created_at }}
                             </time>
                         </span>
                         </div>
@@ -82,7 +82,7 @@
                             <!-- LeanCloud 统计文章PV -->
                             <span id="leancloud-post-views-container" class="post-meta" style="display: inline;">
                             <i class="iconfont icon-eye" aria-hidden="true"></i>
-                            <span id="leancloud-post-views">714</span> 次
+                            <span id="leancloud-post-views">{{ $currentPost->view_count }}</span> 次
                         </span>
                         </div>
                     @endif
@@ -98,21 +98,21 @@
 </header>
 
 @section('Script')
-<script>
-    /* 打字机 start */
-    var typed = new Typed('#subtitle', {
-        strings: [
-            '  ',
-            `{{ (current_navigation($navigations))['sub_title'] }}&nbsp;`,
-        ],
-        cursorChar: "_",
-        typeSpeed: 70,
-        loop: false,
-    });
-    typed.stop();
-    $(document).ready(function () {
-        $(".typed-cursor").addClass("h2");
-        typed.start();
-    });
-</script>
+    <script>
+        /* 打字机 start */
+        const typed = new Typed('#subtitle', {
+            strings: [
+                '  ',
+                `{{ (current_navigation($navigations, $currentPost))['sub_title'] }}&nbsp;`,
+            ],
+            cursorChar: "_",
+            typeSpeed: 70,
+            loop: false,
+        });
+        typed.stop();
+        $(document).ready(function () {
+            $(".typed-cursor").addClass("h2");
+            typed.start();
+        });
+    </script>
 @endsection

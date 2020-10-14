@@ -8,4 +8,4 @@ Route::get('/categories', [\App\Http\Controllers\CategoryController::class, 'ind
 Route::get('/tags', [\App\Http\Controllers\TagController::class, 'index'])->name('tags.index');
 Route::get('/about', [\App\Http\Controllers\AboutController::class, 'index'])->name('about.index');
 Route::get('/links', [\App\Http\Controllers\LinkController::class, 'index'])->name('links.index');
-Route::get('/posts/{id}', [\App\Http\Controllers\PostController::class, 'show'])->name('posts.show');
+Route::get('/posts/{post}', [\App\Http\Controllers\PostController::class, 'show'])->name('posts.show');
