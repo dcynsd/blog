@@ -44,5 +44,7 @@
     @include('layouts._footer')
 </div>
 <script src="{{ mix('js/app.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
+@yield('Script')
 </body>
 </html>

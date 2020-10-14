@@ -1,22 +1,3 @@
-import Typed from './typed'
-
-/* 打字机 start */
-var typed = new Typed('#subtitle', {
-    strings: [
-        '  ',
-        "一款 Material Design 风格的 Hexo 主题&nbsp;",
-    ],
-    cursorChar: "_",
-    typeSpeed: 70,
-    loop: false,
-});
-typed.stop();
-$(document).ready(function () {
-    $(".typed-cursor").addClass("h2");
-    typed.start();
-});
-/* 打字机 end */
-
 window.requestAnimationFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame;
 
 /**
