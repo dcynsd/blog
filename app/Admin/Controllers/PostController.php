@@ -19,19 +19,17 @@ class PostController extends AdminController
      */
     protected function grid()
     {
-        return Grid::make(Post::with('category', 'tags'), function (Grid $grid) {
+        return Grid::make(Post::with('category', 'tags')->withoutGlobalScopes(), function (Grid $grid) {
             $grid->column('id')->sortable();
             $grid->column('category.name', '分类名称');
             $grid->column('tags')->pluck('name')->label();
             $grid->column('title');
-            $grid->column('sub_title');
-            $grid->column('slug');
             $grid->column('author');
             $grid->column('original_url');
             $grid->column('view_count');
-            $grid->column('order')->editable(true);
+            $grid->column('order')->editable(true)->sortable();
             $grid->column('is_issued')->switch();
-            $grid->column('created_at');
+            $grid->column('created_at')->sortable();
             $grid->column('updated_at')->sortable();
 
             $grid->filter(function (Grid\Filter $filter) {
@@ -50,7 +48,7 @@ class PostController extends AdminController
      */
     protected function detail($id)
     {
-        return Show::make($id, new Post(), function (Show $show) {
+        return Show::make($id, Post::withoutGlobalScopes(), function (Show $show) {
             $show->field('id');
             $show->field('category_id');
             $show->field('title');
@@ -75,7 +73,7 @@ class PostController extends AdminController
      */
     protected function form()
     {
-        return Form::make(Post::with('tags'), function (Form $form) {
+        return Form::make(Post::with('tags')->withoutGlobalScopes(), function (Form $form) {
             $form->display('id');
             $form->select('category_id')
                 ->options(Category::all()->pluck('name', 'id'))

@@ -5,34 +5,29 @@ if (! function_exists('current_navigation')) {
      * 获取当前导航
      * @param $navigations
      * @param $post
+     * @param null $currentModel
      * @return array|bool|mixed
      */
-    function current_navigation($navigations, $post = null)
+    function current_navigation($navigations, $post = null, $currentModel = null)
     {
         if (\Illuminate\Support\Facades\Route::currentRouteName() === 'posts.show') {
             return [
                 'height' => '60vh',
-                'image' => $post ? $post->image : 'https://rmt.dogedoge.com/fetch/fluid/storage/bg/dojm2h.png?w=1920&q=100&fmt=webp',
+                'image' => $post ? $post->image : '',
                 'is_scroll_down_bar' => false,
                 'is_post_meta' => true,
-                'sub_title' => $post ? $post->title : '文章'
+                'sub_title' => $post ? $post->title : '',
             ];
         }
         $route = \Illuminate\Support\Facades\Route::getCurrentRoute();
-        $uri = $route->uri !== '/' ? "/{$route->uri}" : '/';
+        $arr = explode('/', $route->uri);
+        $uri = $route->uri !== '/' ? "/{$arr[0]}" : '/';
         $res = $navigations->search(function ($item) use ($uri) {
             return $item['url'] === $uri;
         });
-        if ($res === false) {
-            return [
-                'height' => '60vh',
-                'image' => 'https://rmt.dogedoge.com/fetch/fluid/storage/bg/dojm2h.png?w=1920&q=100&fmt=webp',
-                'is_scroll_down_bar' => false,
-                'is_post_meta' => true,
-                'sub_title' => '文章'
-            ];
-        }
-        return $navigations[$res];
+        $nav = $navigations[$res];
+        $nav['sub_title'] = $currentModel ? $nav['sub_title'].' - '.$currentModel->name : $nav['sub_title'];
+        return $nav;
     }
 }
 

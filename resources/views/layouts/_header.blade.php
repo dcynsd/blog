@@ -97,13 +97,13 @@
     </div>
 </header>
 
-@section('Script')
+@section('HeadScript')
     <script>
         /* 打字机 start */
         const typed = new Typed('#subtitle', {
             strings: [
                 '  ',
-                `{{ (current_navigation($navigations, $currentPost))['sub_title'] }}&nbsp;`,
+                `{{ (current_navigation($navigations, $currentPost, $currentModel))['sub_title'] }}&nbsp;`,
             ],
             cursorChar: "_",
             typeSpeed: 70,

@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Post;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Arr;
 
 class PostsTableSeeder extends Seeder
 {
@@ -16,7 +17,12 @@ class PostsTableSeeder extends Seeder
     {
         Post::factory(100)
             ->create()->each(function (Post $post) {
-                $post->tags()->sync([1, 2, 3]);
+                $rand = Arr::random([1, 2, 3]);
+                $data = [];
+                for ($i = 1; $i <= $rand; $i++) {
+                    $data[] = $i;
+                }
+                $post->tags()->sync($data);
             });
     }
 }

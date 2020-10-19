@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', '归档')
+@section('title', $currentModel->name)
 
 @section('content')
     @include('layouts._archive', ['posts' => $posts])

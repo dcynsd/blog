@@ -6,8 +6,9 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', 'DCY') - blog</title>
-    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+    <title>@yield('title', '博客') - DCYNSD</title>
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    @yield('Style')
 </head>
 <body>
 <div id="app">
@@ -43,8 +44,9 @@
     </div>
     @include('layouts._footer')
 </div>
-<script src="{{ mix('js/app.js') }}"></script>
+<script src="{{ asset('js/app.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
+@yield('HeadScript')
 @yield('Script')
 </body>
 </html>

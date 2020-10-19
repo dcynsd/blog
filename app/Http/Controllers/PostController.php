@@ -7,10 +7,15 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    public function show(Post $post)
+    public function show(Post $post, Request $request)
     {
-        $last = Post::where('id', '<', $post->id)->latest('id')->first();
-        $next = Post::where('id', '>', $post->id)->oldest('id')->first();
+        if ( ! empty($post->slug) && $post->slug != $request->slug) {
+            return redirect($post->link(), 301);
+        }
+
+        $last = $post->getLastPage();
+        $next = $post->getNextPage();
+
         return view('posts.show', compact('post', 'last', 'next'))->with('currentPost', $post);
     }
 }

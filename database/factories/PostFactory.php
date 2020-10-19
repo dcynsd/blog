@@ -21,12 +21,8 @@ class PostFactory extends Factory
      */
     public function definition()
     {
-        $sentence = $this->faker->sentence();
-
-        // 随机取一个月以内的时间
-        $updatedAt = $this->faker->dateTimeThisMonth();
-        // 为创建时间传参，意为最大不超过 $updated_at，因为创建时间需永远比更改时间要早
-        $createdAt = $this->faker->dateTimeThisMonth($updatedAt);
+        $updatedAt = $this->faker->dateTimeBetween('2017-01-01', 'now', 'Asia/Shanghai');
+        $createdAt = $this->faker->dateTimeBetween($updatedAt, 'now', 'Asia/Shanghai');
 
         $images = [
             'https://rmt.dogedoge.com/fetch/fluid/storage/bg/vdysjx.png?w=1920',
@@ -39,11 +35,10 @@ class PostFactory extends Factory
 
         return [
             'category_id' => $this->faker->randomElement([1, 2, 3, 4]),
-            'title' => $sentence,
-            'sub_title' => $sentence,
+            'title' => $this->faker->sentence(),
+            'sub_title' => $this->faker->sentence(),
             'image' => $this->faker->randomElement($images),
-            'content' => $this->faker->text(),
-            'excerpt' => $sentence,
+            'content' => $this->faker->paragraphs(7, true),
             'is_issued' => true,
             'created_at' => $createdAt,
             'updated_at' => $updatedAt,

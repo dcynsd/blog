@@ -10,8 +10,9 @@ class PageController extends Controller
     public function root()
     {
         $posts = Post::query()
-            ->where('is_issued', true)
-            ->paginate(5);
+            ->orderByDesc('order')
+            ->latest()
+            ->paginate(10);
 
         return view('pages.root', compact('posts'));
     }

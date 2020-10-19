@@ -37,59 +37,22 @@
                                             </div>
                                             <div class="post-meta mr-3">
                                                 <i class="iconfont icon-category"></i>
-                                                <a href="{{ $post->link() }}">
+                                                <a href="{{ $post->category->link() }}">
                                                     {{ $post->category->name }}
                                                 </a>
                                             </div>
                                             <div class="post-meta">
                                                 <i class="iconfont icon-tags"></i>
                                                 @foreach($post->tags as $tag)
-                                                    <a href="#">{{ $tag->name }}</a>
+                                                    <a href="{{ $tag->link() }}">{{ $tag->name }}</a>
                                                 @endforeach
                                             </div>
                                         </div>
                                     </article>
                                 </div>
                             @endforeach
-                            <nav aria-label="navigation">
-                                <span class="pagination" id="pagination">
-                                    @if(!$posts->onFirstPage())
-                                        <a class="extend next" rel="next"
-                                           href="{{ $posts->fragment('board')->previousPageUrl() }}">
-                                            <i class="iconfont icon-arrowleft"></i>
-                                        </a>
-                                    @endif
-                                    @php
-                                        $isHiddenExist = 0
-                                    @endphp
-                                    @for($i = 1; $i <= $posts->lastPage(); $i++)
-                                        @if($posts->currentPage() === $i)
-                                            <span class="page-number current">{{ $i }}</span>
-                                        @else
-                                            @if ($i < 4 || $i < ($posts->currentPage() + 3) && $i > ($posts->currentPage() - 3) || $i > ($posts->lastPage() / 2 - 2) && $i < ($posts->lastPage() / 2 + 2) || $i > ($posts->lastPage() - 3))
-                                                <a class="page-number"
-                                                   href="{{ $posts->fragment('board')->url($i) }}">{{ $i }}</a>
-                                                @php
-                                                    $isHiddenExist = 0
-                                                @endphp
-                                            @else
-                                                @if($isHiddenExist === 0)
-                                                    ...
-                                                    @php
-                                                        $isHiddenExist = 1;
-                                                    @endphp
-                                                @endif
-                                            @endif
-                                        @endif
-                                    @endfor
-                                    @if ($posts->hasMorePages())
-                                        <a class="extend next" rel="next"
-                                           href="{{ $posts->fragment('board')->nextPageUrl() }}">
-                                            <i class="iconfont icon-arrowright"></i>
-                                        </a>
-                                    @endif
-                                </span>
-                            </nav>
+
+                            @include('layouts._pagination', ['model' => $posts])
                         </div>
                     </div>
                 </div>

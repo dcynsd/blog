@@ -30,6 +30,7 @@ class AppServiceProvider extends ServiceProvider
     {
         View::share('navigations', app(NavigationService::class)->getNavBars());
         View::share('currentPost', null);
+        View::share('currentModel', null);
         Paginator::useBootstrap();
 
         $this->registerObservers();
