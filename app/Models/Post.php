@@ -9,7 +9,7 @@ class Post extends Model
 {
     protected $fillable = [
         'title', 'sub_title', 'image', 'content', 'excerpt', 'slug', 'author', 'original_url',
-        'view_count', 'order', 'is_issued',
+        'view_count', 'word_count', 'order', 'is_issued',
     ];
 
     protected $casts = [
@@ -53,8 +53,18 @@ class Post extends Model
         return $this->author ?? 'dcynsd';
     }
 
+    public function getReadSpeedAttribute()
+    {
+        return ceil($this->word_count / 300);
+    }
+
     public function getHtmlPostAttribute()
     {
         return app(MarkdownHandler::class)->convertMarkdownToHtml($this->content);
+    }
+
+    public function visits()
+    {
+        return visits($this);
     }
 }

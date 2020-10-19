@@ -44,3 +44,29 @@ if (! function_exists('make_excerpt')) {
         return \Illuminate\Support\Str::limit($excerpt, $length);
     }
 }
+
+if (! function_exists('post_word_count')) {
+    /**
+     * 统计文章字数
+     * @param $str
+     * @return bool|false|int
+     */
+    function post_word_count($str){
+        // 判断是否存在替换字符
+        $isReplaceCount = substr_count($str,"龘");
+        try {
+            // 先将回车换行符做特殊处理
+            $str = preg_replace('/(\r\n+|\s+|　+)/',"龘",$str);
+            // 处理英文字符数字，连续字母、数字、英文符号视为一个单词
+            $str = preg_replace('/[a-z_A-Z0-9-\.!@#\$%\\\^&\*\)\(\+=\{\}\[\]\/",\'<>~`\?:;|]/',"m",$str);
+            // 合并字符m，连续字母、数字、英文符号视为一个单词
+            $str = preg_replace('/m+/',"*",$str);
+            // 去掉回车换行符
+            $str = preg_replace('/龘+/',"",$str);
+            // 返回字数
+            return mb_strlen($str) + $isReplaceCount;
+        } catch (Exception $e) {
+            return 0;
+        }
+    }
+}

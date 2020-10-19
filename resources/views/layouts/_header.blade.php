@@ -72,18 +72,16 @@
                         <div class="mt-1">
                         <span class="post-meta mr-2">
                             <i class="iconfont icon-chart"></i>
-                            4k 字
+                            {{ $currentPost->word_count }} 字
                         </span>
                             <span class="post-meta mr-2">
                             <i class="iconfont icon-clock-fill"></i>
-                            57
+                            {{ $currentPost->read_speed }}
                             分钟
                         </span>
                             <!-- LeanCloud 统计文章PV -->
-                            <span id="leancloud-post-views-container" class="post-meta" style="display: inline;">
                             <i class="iconfont icon-eye" aria-hidden="true"></i>
-                            <span id="leancloud-post-views">{{ $currentPost->view_count }}</span> 次
-                        </span>
+                            <span id="leancloud-post-views">{{ $currentPost->visits()->count()}}</span> 次
                         </div>
                     @endif
                 </div>

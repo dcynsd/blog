@@ -16,6 +16,8 @@ class PostController extends Controller
         $last = $post->getLastPage();
         $next = $post->getNextPage();
 
+        $post->visits()->increment();
+
         return view('posts.show', compact('post', 'last', 'next'))->with('currentPost', $post);
     }
 }

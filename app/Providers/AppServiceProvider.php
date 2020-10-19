@@ -5,7 +5,6 @@ namespace App\Providers;
 use App\Models\Post;
 use App\Observers\PostObserver;
 use App\Services\NavigationService;
-use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -31,7 +30,6 @@ class AppServiceProvider extends ServiceProvider
         View::share('navigations', app(NavigationService::class)->getNavBars());
         View::share('currentPost', null);
         View::share('currentModel', null);
-        Paginator::useBootstrap();
 
         $this->registerObservers();
     }

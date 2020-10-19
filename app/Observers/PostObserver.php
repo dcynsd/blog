@@ -10,6 +10,8 @@ class PostObserver
     public function saving(Post $post)
     {
         $post->excerpt = make_excerpt($post->content);
+
+        $post->word_count = post_word_count($post->content);
     }
 
     public function saved(Post $post)

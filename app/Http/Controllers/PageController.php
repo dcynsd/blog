@@ -10,6 +10,7 @@ class PageController extends Controller
     public function root()
     {
         $posts = Post::query()
+            ->with('tags', 'category')
             ->orderByDesc('order')
             ->latest()
             ->paginate(10);
