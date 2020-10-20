@@ -58,30 +58,31 @@
                     <span class="typed-cursor h2 typed-cursor--blink"></span>
                     @if($currentPost)
                         <div class="mt-3">
-                        <span class="post-meta mr-2">
-                            <i class="iconfont icon-author" aria-hidden="true"></i>
-                            {{ $currentPost->author }}
-                        </span>
-                            <span class="post-meta">
-                            <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-                            <time datetime="{{ $currentPost->created_at }}">
-                                {{ $currentPost->created_at }}
-                            </time>
-                        </span>
+                            <span class="post-meta mr-2 hint--left hint--rounded" aria-label="作者">
+                                <i class="iconfont icon-author" aria-hidden="true"></i>
+                                {{ $currentPost->author }}
+                            </span>
+                            <span class="post-meta hint--top hint--right" aria-label="发布时间">
+                                <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+                                <time datetime="{{ $currentPost->created_at }}">
+                                    {{ $currentPost->created_at }}
+                                </time>
+                            </span>
                         </div>
                         <div class="mt-1">
-                        <span class="post-meta mr-2">
-                            <i class="iconfont icon-chart"></i>
-                            {{ $currentPost->word_count }} 字
-                        </span>
-                            <span class="post-meta mr-2">
-                            <i class="iconfont icon-clock-fill"></i>
-                            {{ $currentPost->read_speed }}
-                            分钟
-                        </span>
-                            <!-- LeanCloud 统计文章PV -->
-                            <i class="iconfont icon-eye" aria-hidden="true"></i>
-                            <span id="leancloud-post-views">{{ $currentPost->visits()->count()}}</span> 次
+                            <span class="post-meta mr-2 hint--bottom hint--rounded" aria-label="文章字数">
+                                <i class="iconfont icon-chart"></i>
+                                {{ $currentPost->word_count }} 字
+                            </span>
+                            <span class="post-meta mr-2 hint--bottom hint--rounded" aria-label="阅读时间">
+                                <i class="iconfont icon-clock-fill"></i>
+                                {{ $currentPost->read_speed }}
+                                分钟
+                            </span>
+                            <span class="hint--bottom hint--rounded" aria-label="阅读次数">
+                                <i class="iconfont icon-eye" aria-hidden="true"></i>
+                                <span id="leancloud-post-views" >{{ $currentPost->view_count }}</span> 次
+                            </span>
                         </div>
                     @endif
                 </div>

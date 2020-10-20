@@ -21,10 +21,10 @@ class PostController extends AdminController
     {
         return Grid::make(Post::with('category', 'tags')->withoutGlobalScopes(), function (Grid $grid) {
             $grid->column('id')->sortable();
-            $grid->column('category.name', '分类名称');
-            $grid->column('tags')->pluck('name')->label();
             $grid->column('title');
             $grid->column('author');
+            $grid->column('category.name', '分类名称');
+            $grid->column('tags')->pluck('name')->label();
             $grid->column('original_url');
             $grid->column('view_count');
             $grid->column('order')->editable(true)->sortable();

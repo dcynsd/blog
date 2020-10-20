@@ -188,6 +188,9 @@
                     $(this).attr('id', headerId);
                 }
             });
+            if (Object.keys(idArr).length === 0) {
+                $('#toc').hide()
+            }
 
             // 文章内 a 标签全部替换成新页面打开
             $('#post-body a').each(function () {
