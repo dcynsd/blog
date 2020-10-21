@@ -151,29 +151,6 @@
         })
 
         $(document).ready(function () {
-            // 文章内代码区域增加复制按钮
-            const copyClassName = 'hljs-button'
-            let copyHtml = '<div class="' + copyClassName + '">复制</div>';    // 添加复制按钮
-            $("code").after(copyHtml);
-            $(`.${copyClassName}`).mouseout(function () {
-                $(this).html("复制");
-                let sel = window.getSelection();  //获取selection
-                sel.removeAllRanges();            //清空selection里的range
-            });
-            $(`.${copyClassName}`).click(function () {
-                let sel = window.getSelection();  // 获取selection
-                sel.removeAllRanges();            // 清空selection里的range
-                let range = document.createRange();
-                range.selectNode($(this).siblings('code.hljs')[0]);
-                sel.addRange(range);
-                let txt = sel.anchorNode.innerText;
-                let area = $('<textarea name="" id="board" cols="30" rows="10"></textarea>');
-                area.val(txt);
-                area[0].select();
-                document.execCommand('copy'); // 执行复制命令，复制成功!
-                $(this).html("复制成功");
-            })
-
             let headerSelector = "h1,h2,h3,h4"
             let idArr = {};
             // 文章内标题头增加ID属性

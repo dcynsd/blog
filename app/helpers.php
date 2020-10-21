@@ -13,7 +13,7 @@ if (! function_exists('current_navigation')) {
         if (\Illuminate\Support\Facades\Route::currentRouteName() === 'posts.show') {
             return [
                 'height' => '60vh',
-                'image' => $post ? $post->image : '',
+                'image' => $post ? $post->full_image : '',
                 'is_scroll_down_bar' => false,
                 'is_post_meta' => true,
                 'sub_title' => $post ? $post->title : '',
@@ -26,6 +26,15 @@ if (! function_exists('current_navigation')) {
             return $item['url'] === $uri;
         });
         $nav = $navigations[$res];
+        // if ($uri === '/') {
+        //     $arr = [
+        //         'Coding is an art.',
+        //         '时间不在于你拥有多少，而在于你如何使用。',
+        //         '我于杀戮之中绽放，亦如黎明中的花朵。',
+        //
+        //     ];
+        //     $nav['sub_title'] = $arr[array_rand($arr)];
+        // }
         $nav['sub_title'] = $currentModel ? $nav['sub_title'].' - '.$currentModel->name : $nav['sub_title'];
         return $nav;
     }
@@ -68,5 +77,39 @@ if (! function_exists('post_word_count')) {
         } catch (Exception $e) {
             return 0;
         }
+    }
+}
+
+if (! function_exists('makeFullUrl')) {
+    /**
+     * 获得完整 URL 地址
+     * @param string|array $url
+     * @return string | array
+     */
+    function makeFullUrl($url)
+    {
+        if (! $url) {
+            return '';
+        }
+
+        if (is_array($url)) {
+            $result = [];
+
+            foreach ($url as $item) {
+                $result[] = makeFullUrl($item);
+            }
+
+            return $result;
+        }
+
+        if (\Illuminate\Support\Str::startsWith($url, 'http')) {
+            return $url;
+        }
+
+        if (! \Illuminate\Support\Str::startsWith($url, '/')) {
+            $url = "/{$url}";
+        }
+
+        return config('app.url') . "/storage{$url}";
     }
 }

@@ -11,15 +11,19 @@
         "php": "^7.3",
         "ext-json": "*",
         "awssat/laravel-visits": "^3.0",
+        "binarytorch/larecipe": "^2.4",
         "dcat/laravel-admin": "^1.7",
         "erusev/parsedown": "^1.7",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.0",
+        "laravel/scout": "^8.4",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^3.0",
-        "overtrue/pinyin": "~4.0"
+        "lmz/phpanalysis": "^1.0",
+        "overtrue/pinyin": "~4.0",
+        "vanry/laravel-scout-tntsearch": "^2.3"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.5",

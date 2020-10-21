@@ -44,6 +44,9 @@
                             <i class="iconfont icon-search"></i>&nbsp;
                         </a>
                     </li>
+                        <li class="nav-item" id="color-toggle-btn">
+                            <a class="nav-link" href="javascript:" rel="external nofollow noreferrer" data-pjax-state="external">&nbsp;<i class="iconfont icon-light" id="color-toggle-icon" data="light"></i>&nbsp;</a>
+                        </li>
                 </ul>
             </div>
         </div>
@@ -105,7 +108,7 @@
                 `{{ (current_navigation($navigations, $currentPost, $currentModel))['sub_title'] }}&nbsp;`,
             ],
             cursorChar: "_",
-            typeSpeed: 70,
+            typeSpeed: 80,
             loop: false,
         });
         typed.stop();

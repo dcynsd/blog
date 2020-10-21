@@ -23,9 +23,9 @@ class PostController extends AdminController
             $grid->column('id')->sortable();
             $grid->column('title');
             $grid->column('author');
+            $grid->column('image')->image('', 50, 50);
             $grid->column('category.name', '分类名称');
             $grid->column('tags')->pluck('name')->label();
-            $grid->column('original_url');
             $grid->column('view_count');
             $grid->column('order')->editable(true)->sortable();
             $grid->column('is_issued')->switch();
@@ -89,6 +89,7 @@ class PostController extends AdminController
                 });
             $form->text('title')->required()->rules('required');
             $form->text('sub_title')->required()->rules('required');
+            $form->image('image')->disableRemove()->required()->rules('required');
             $form->markdown('content')->required()->rules('required');
             $form->text('excerpt');
             $form->text('slug');

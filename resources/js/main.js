@@ -159,6 +159,10 @@ function scrollTopArrowEvent() {
     });
 }
 
+require('./color-schema')
+require('./lazyload')
+require('./clipboard-use')
+
 $(document).ready(function () {
     navbarScrollEvent();
     parallaxEvent();

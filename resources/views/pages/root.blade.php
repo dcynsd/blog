@@ -12,8 +12,8 @@
                                 <div class="row mx-auto index-card">
                                     <div class="col-12 col-md-4 m-auto index-img">
                                         <a href="{{ $post->link() }}" target="_self">
-                                            <img src="{{ $post->image }}"
-                                                 srcset="{{ $post->image }}"
+                                            <img src="{{ $post->full_image }}"
+                                                 srcset="{{ $post->full_image }}"
                                                  alt="{{ $post->title }}">
                                         </a>
                                     </div>

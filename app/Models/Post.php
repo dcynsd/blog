@@ -4,9 +4,12 @@ namespace App\Models;
 
 use App\Handlers\MarkdownHandler;
 use Illuminate\Database\Eloquent\Builder;
+use Laravel\Scout\Searchable;
 
 class Post extends Model
 {
+    use Searchable;
+
     protected $fillable = [
         'title', 'sub_title', 'image', 'content', 'excerpt', 'slug', 'author', 'original_url',
         'view_count', 'word_count', 'order', 'is_issued',
@@ -66,5 +69,19 @@ class Post extends Model
     public function visits()
     {
         return visits($this);
+    }
+
+    public function getFullImageAttribute()
+    {
+        return makeFullUrl($this->image);
+    }
+
+    public function toSearchableArray()
+    {
+        return [
+            'id' => $this->id,
+            'title' => $this->title,
+            'content' => strip_tags($this->content),
+        ];
     }
 }

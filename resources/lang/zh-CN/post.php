@@ -16,6 +16,7 @@ return [
         'order' => '排序',
         'is_issued' => '是否发布',
         'tags' => '标签',
+        'image' => '封面图',
     ],
     'options' => [
     ],
