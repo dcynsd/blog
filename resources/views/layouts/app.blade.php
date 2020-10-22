@@ -7,9 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="theme-color" content="#2f4154">
-    <meta name="description" content="This Is Dcynsd's Blog">
+    <meta name="description" content="@yield('description', 'This Is Dcynsd\'s Blog')" />
     <meta name="author" content="Dcynsd">
-    <meta name="keywords" content="dcynsd,blog,fluid,material,material-design,blog,laravel">
+    <meta name="keyword" content="@yield('keyword', 'dcynsd,blog,博客,laravel,Laravel')" />
     <link rel="icon" type="image/png" href="{{ asset('storage/images/avatar.png') }}">
     <title>@yield('title', '博客') - DCYNSD</title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">

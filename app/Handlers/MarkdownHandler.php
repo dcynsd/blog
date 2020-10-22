@@ -17,6 +17,6 @@ class MarkdownHandler
 
     public function convertMarkdownToHtml($markdown)
     {
-        return $this->markdownConverter->setBreaksEnabled(true)->text($markdown);
+        return $this->markdownConverter->setSafeMode(true)->setBreaksEnabled(true)->text($markdown);
     }
 }

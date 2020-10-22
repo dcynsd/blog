@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('title', $post->slug)
+@section('description', $post->excerpt)
 @section('Style')
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.3.1/build/styles/github-gist.min.css">
@@ -61,6 +62,14 @@
                                 <h1 style="display: none">{{ $post->excerpt }}</h1>
 
                                 <div class="markdown-body" id="post-body">
+                                    @if($post->original_url)
+                                    <div class="note note-success">
+                                        <p>本文版权归原作者所有，如有侵权，请联系我删除。</p>
+                                        <p>本文作者：{{ $post->author }}</p>
+                                        <p>原文地址：<a target="_blank" rel="noopener external nofollow noreferrer" href="{{ $post->original_url }}">{{ $post->original_url }}</a></p>
+                                    </div>
+                                    @endif
+
                                     {!! $post->html_post !!}
                                 </div>
 
