@@ -150,9 +150,9 @@ return [
     */
 
     'seo'                 => [
-        'author'          => '',
-        'description'     => '',
-        'keywords'        => '',
+        'author'          => 'dcynsd',
+        'description'     => 'Dcynsd',
+        'keywords'        => 'dcynsd,Dcynsd,Blog,blog,博客,文档,Laravel,laravel',
         'og'              => [
             'title'       => '',
             'type'        => 'article',

@@ -19,5 +19,6 @@ Route::group([
     $router->resource('tags', 'TagController');
     $router->resource('links', 'LinkController');
     $router->resource('navigations', 'NavigationController');
+    $router->get('about', 'AboutController@index');
 
 });

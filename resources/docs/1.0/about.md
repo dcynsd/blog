@@ -9,9 +9,7 @@
 <a name="section-1"></a>
 ## 简介
 
-后端开发 / 游戏爱好者 / 巴萨球迷
-
-我是一名后端开发，热爱研究各种新的语言与框架，目前涉足 PHP / Laravel / Golang / Vue 等技术栈。
+`Dcynsd` 主要从事后端开发，热爱研究各种新的语言与框架，目前涉足 PHP / Laravel / Golang / Vue 等技术栈。
 
 <a name="section-2"></a>
 ## 技术栈
