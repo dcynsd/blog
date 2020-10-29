@@ -81,12 +81,14 @@
                                             <a class="hover-with-bg"
                                                href="{{ $post->category->link() }}">{{ $post->category->name }}</a>
                                         </div>
-                                        <div class="post-meta">
-                                            <i class="iconfont icon-tags"></i>
-                                            @foreach($post->tags as $tag)
-                                                <a class="hover-with-bg" href="{{ $tag->link() }}">{{ $tag->name }}</a>
-                                            @endforeach
-                                        </div>
+                                        @if ($post->tags)
+                                            <div class="post-meta">
+                                                <i class="iconfont icon-tags"></i>
+                                                @foreach($post->tags as $tag)
+                                                    <a class="hover-with-bg" href="{{ $tag->link() }}">{{ $tag->name }}</a>
+                                                @endforeach
+                                            </div>
+                                        @endif
                                     </div>
 
                                     <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a

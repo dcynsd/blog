@@ -41,12 +41,14 @@
                                                     {{ $post->category->name }}
                                                 </a>
                                             </div>
-                                            <div class="post-meta">
-                                                <i class="iconfont icon-tags"></i>
-                                                @foreach($post->tags as $tag)
-                                                    <a href="{{ $tag->link() }}">{{ $tag->name }}</a>
-                                                @endforeach
-                                            </div>
+                                            @if ($post->tags)
+                                                <div class="post-meta">
+                                                    <i class="iconfont icon-tags"></i>
+                                                    @foreach($post->tags as $tag)
+                                                        <a href="{{ $tag->link() }}">{{ $tag->name }}</a>
+                                                    @endforeach
+                                                </div>
+                                            @endif
                                         </div>
                                     </article>
                                 </div>
