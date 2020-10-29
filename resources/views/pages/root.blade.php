@@ -41,7 +41,7 @@
                                                     {{ $post->category->name }}
                                                 </a>
                                             </div>
-                                            @if ($post->tags)
+                                            @if ($post->tags->count())
                                                 <div class="post-meta">
                                                     <i class="iconfont icon-tags"></i>
                                                     @foreach($post->tags as $tag)
