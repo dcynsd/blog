@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
+use Laravel\Scout\Searchable;
 use App\Handlers\MarkdownHandler;
 use Illuminate\Database\Eloquent\Builder;
-use Laravel\Scout\Searchable;
 
 class Post extends Model
 {
@@ -48,7 +48,7 @@ class Post extends Model
 
     public function getLastPage()
     {
-        return Post::where('id', '>', $this->id)->oldest('id')->first();
+        return Post::where('id', '<', $this->id)->oldest('id')->first();
     }
 
     public function getAuthorAttribute()
