@@ -48,7 +48,7 @@ class Post extends Model
 
     public function getLastPage()
     {
-        return Post::where('id', '<', $this->id)->oldest('id')->first();
+        return Post::where('id', '<', $this->id)->latest('id')->first();
     }
 
     public function getAuthorAttribute()
