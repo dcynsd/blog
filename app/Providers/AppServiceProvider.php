@@ -27,11 +27,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        View::share('navigations', app(NavigationService::class)->getNavBars());
-        View::share('currentPost', null);
-        View::share('currentModel', null);
+        if (!app()->runningInConsole()) {
+            View::share('navigations', app(NavigationService::class)->getNavBars());
+            View::share('currentPost', null);
+            View::share('currentModel', null);
 
-        $this->registerObservers();
+            $this->registerObservers();
+        }
     }
 
     private function registerObservers()
