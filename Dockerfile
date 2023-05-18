@@ -1,43 +1,25 @@
-FROM composer as composer
+FROM php:8.1-fpm
+ENV TZ Asia/Shanghai
+RUN date -R
 
-COPY database/ /app/database/
-COPY composer.json /app/
+# 换源
+RUN echo 'deb http://mirrors.ustc.edu.cn/debian stable main contrib non-free' >/etc/apt/sources.list \
+    && echo 'deb http://mirrors.ustc.edu.cn/debian stable-updates main contrib non-free' >>/etc/apt/sources.list
+RUN apt-get update --fix-missing  \
+    && apt-get install -y openssl vim supervisor \
+    && docker-php-ext-install pdo_mysql bcmath
 
-RUN set -x ; cd /app \
-    && composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/ \
-    && composer install \
-    --ignore-platform-reqs \
-    --no-interaction \
-    --no-plugins \
-    --no-scripts \
-    --prefer-dist
+ENV PHPREDIS_VERSION 5.3.7
 
-FROM php:8.1-fpm-alpine as laravel
+WORKDIR /var/www
 
-ARG LARAVEL_PATH=/app/laravel
+RUN pecl install redis-$PHPREDIS_VERSION \
+    && docker-php-ext-enable redis
 
-COPY --from=composer /app/vendor/ ${LARAVEL_PATH}/vendor/
-COPY . ${LARAVEL_PATH}
+RUN curl -O https://mirrors.aliyun.com/composer/composer.phar  \
+    && mv composer.phar /usr/local/bin/composer  \
+    && chmod a+x /usr/local/bin/composer
 
-RUN set -x ; cd ${LARAVEL_PATH} \
-    && mkdir -p storage \
-    && mkdir -p storage/framework/cache \
-    && mkdir -p storage/framework/sessions \
-    && mkdir -p storage/framework/testing \
-    && mkdir -p storage/framework/views \
-    && mkdir -p storage/logs \
-    && chmod -R 777 storage \
-    && php artisan package:discover \
-    && apk update && apk add nginx \
-    && apk add m4 autoconf make gcc g++ \
-    && docker-php-ext-install pdo_mysql opcache bcmath \
-    && chmod 755 ./run.sh \
-    && chown -R www-data:www-data storage && chown -R www-data:www-data bootstrap/cache \
-    && cat ./laravel.conf > /etc/nginx/http.d/default.conf
-
-WORKDIR ${LARAVEL_PATH}
-
-EXPOSE 80
 EXPOSE 9000
 
-ENTRYPOINT ["./run.sh"]
+CMD ["php-fpm"]
