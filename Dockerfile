@@ -32,9 +32,8 @@ RUN set -x ; cd ${LARAVEL_PATH} \
     && apk add m4 autoconf make gcc g++ \
     && docker-php-ext-install pdo_mysql opcache bcmath \
     && chmod 755 ./run.sh \
-    && chown -R www-data:www-data storage && chown -R www-data:www-data bootstrap/cache
-
-COPY ./laravel.conf /etc/nginx/http.d/default.conf
+    && chown -R www-data:www-data storage && chown -R www-data:www-data bootstrap/cache \
+    && cat ./laravel.conf > /etc/nginx/http.d/default.conf
 
 WORKDIR ${LARAVEL_PATH}
 

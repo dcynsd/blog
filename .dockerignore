@@ -13,4 +13,3 @@ storage/
 # 自行添加其他需要排除的文件，例如 .env.* 文件
 .env
 docker-compose.yml
-laravel.conf
