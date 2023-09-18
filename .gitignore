@@ -17,3 +17,5 @@ yarn-error.log
 /.idea
 /.vscode
 /storage/*.index
+/docker/redis
+/docker/mysql
